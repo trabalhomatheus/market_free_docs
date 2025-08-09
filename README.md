@@ -28,11 +28,10 @@ Projeto backend acadêmico de um sistema e-commerce construído com **arquitetur
 
 ## ⚙️ Tecnologias Utilizadas
 
-- **Linguagem:** Node.js / Python / Go (ajuste conforme seu stack)
-- **API Gateway:** Express Gateway / NGINX / Traefik
+- **Linguagem:** Node.js
 - **Orquestração:** Kubernetes
 - **Logs:** MongoDB + Logger customizado
-- **Observabilidade:** Prometheus, Grafana, OpenTelemetry
+- **Observabilidade:** Prometheus
 - **Autenticação:** JWT + Autenticação mútua com gRPC
 - **Comunicação entre serviços:** HTTP + gRPC
 - **Containerização:** Docker
