@@ -55,7 +55,7 @@ Projeto backend acadêmico de um sistema e-commerce construído com **arquitetur
 
 - 📘 [Documento de Requisitos (PDF)](./requisitos/Documento_de_Requisitos_Market_Free.pdf)
 - 🧠 [Imagem da Arquitetura](./arquitetura/Arquitetura.jpg)
-
+- 📄 [Documentação de testes](./Documenta%C3%A7%C3%A3o%20de%20Teste)
 > Outras documentações técnicas e arquivos de configuração serão adicionados nesta seção conforme o desenvolvimento evolui.
 
 
@@ -89,6 +89,7 @@ Projeto backend acadêmico de um sistema e-commerce construído com **arquitetur
 > O diagrama representa os principais componentes do sistema, sua comunicação e responsabilidades.
 
 ---
+## 🗂️ Repositórios
 
 ## 📝 Licença
 
