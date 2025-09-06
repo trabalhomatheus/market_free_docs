@@ -90,7 +90,7 @@ Projeto backend acadêmico de um sistema e-commerce construído com **arquitetur
 
 ---
 ## 🗂️ Repositórios
-- 🛒 [MS-produtos](https://github.com/trabalhomatheus/MS-produtos)
+- 🛒 [MS-Produtos](https://github.com/trabalhomatheus/MS-produtos)
 - 📖 [MS-Catalogo](https://github.com/trabalhomatheus/MS-Catalogo)
 
 ## 📝 Licença
