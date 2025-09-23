@@ -1,8 +1,8 @@
 # Documentação de Testes – MS Logs
 
 ## 1. Introdução
-O objetivo desta documentação é descrever os testes a serem realizados no microserviço de logs (ms-logs). O sistema é desenvolvido em Node.js (ESM) com Express 5 e utiliza gRPC para comunicação com o serviço de produtos.
 ---
+O objetivo desta documentação é descrever os testes a serem realizados no microserviço de logs (ms-logs). O sistema é desenvolvido em Node.js (ESM) com Express 5 e utiliza gRPC para comunicação com o serviço de produtos.
 
 ## 2. Escopo dos Testes
 Os testes contemplam:
@@ -31,6 +31,7 @@ Os testes contemplam:
   "user": "admin",
   "log": "{\"ip\":\"127.0.0.1\"}"
 }
+```
 
 **Saída esperada**:
 - **Log criado com id gerado automaticamente.  
