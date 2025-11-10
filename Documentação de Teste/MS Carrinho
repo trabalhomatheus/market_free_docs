@@ -1,0 +1,111 @@
+# Documentação de Testes – MS Carrinho
+
+## 1. Introdução
+O objetivo desta documentação é descrever os testes a serem realizados no microserviço de carrinho de compras (`ms-carrinho`).
+O serviço é responsável por gerenciar itens adicionados ao carrinho pelo usuário, fornecendo operações de criação, leitura, atualização e remoção via gRPC, com persistência em MongoDB.
+
+---
+
+## 2. Escopo dos Testes
+Os testes contemplam:
+- Métodos gRPC expostos pelo serviço (`AddItem`, `RemoveItem`, `GetCart`, `ClearCart`).
+- Persistência de dados no banco MongoDB.
+- Tratamento de erros e respostas padronizadas.
+- Consistência dos dados em cenários de concorrência.
+
+---
+
+## 3. Ambiente de Testes
+- **Node.js**: >= 18
+- **gRPC**: @grpc/grpc-js
+- **Banco**: MongoDB 4.4+
+- **Porta padrão do serviço**: 50052
+- **Ferramentas auxiliares**: Jest, Docker Compose, grpcurl, Minikube (para E2E)
+
+---
+
+## 4. Casos de Teste
+
+### 4.1 Adicionar Item ao Carrinho – Sucesso
+- **Método**: `AddItem`
+- **Entrada**:
+  ```json
+  { "userId": "user-1", "produtoId": "p1", "nome": "Caneca", "quantidade": 1, "preco": 29.9 }
+  ```
+- **Resultado Esperado**:  
+  - Item inserido ou quantidade incrementada corretamente.
+  - `GetCart(userId)` retorna o item com total calculado.
+
+---
+
+### 4.2 Remover Item do Carrinho – Sucesso
+- **Método**: `RemoveItem`
+- **Entrada**:
+  ```json
+  { "userId": "user-1", "produtoId": "p1" }
+  ```
+- **Resultado Esperado**: Item removido do carrinho e banco atualizado.
+
+---
+
+### 4.3 Listar Itens do Carrinho
+- **Método**: `GetCart`
+- **Entrada**:
+  ```json
+  { "userId": "user-1" }
+  ```
+- **Resultados Esperados**:
+  - Carrinho vazio → lista vazia e total 0.
+  - Carrinho com itens → itens exibidos e total correto.
+
+---
+
+### 4.4 Limpar Carrinho
+- **Método**: `ClearCart`
+- **Resultado Esperado**: Carrinho fica vazio.
+
+---
+
+### 4.5 Validação de Entrada
+- **Cenário**: Campos obrigatórios ausentes ou quantidade negativa.
+- **Resultado Esperado**:  
+  - Erro `INVALID_ARGUMENT`
+  - Nenhum dado persistido.
+
+---
+
+### 4.6 Concorrência – Adição Simultânea
+- **Cenário**: Duas chamadas `AddItem` simultâneas para o mesmo item.
+- **Resultado Esperado**:
+  - Quantidade final correta.
+  - Nenhuma duplicação ou inconsistência.
+
+---
+
+### 4.7 Banco Indisponível
+- **Cenário**: Derrubar MongoDB.
+- **Resultado Esperado**:
+  - Erro `UNAVAILABLE` ou `INTERNAL`
+  - Logs registram a falha corretamente.
+
+---
+
+## 5. Estratégia de Teste
+- **Unitários**: Testar lógica de manipulação do carrinho.
+- **Integração**: Executar serviço com MongoDB real usando Docker.
+- **E2E**: Testar o fluxo completo em Kubernetes.
+- **Carga**: Validar concorrência com Artillery ou k6.
+
+---
+
+## 6. Critérios de Aceitação
+- Nenhum erro sem tratamento deve ser retornado ao cliente.
+- Dados consistentes mesmo sob concorrência.
+- Cobertura de testes ≥ 80% na lógica de negócio.
+
+---
+
+## 7. Riscos e Considerações
+- Concorrência pode gerar inconsistência sem operações atômicas.
+- Dependência direta do banco MongoDB.
+
